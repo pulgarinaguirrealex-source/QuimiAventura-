@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6d4aff">
+<title>QuimiAventura Aula — Química para 10.º y 11.º</title>
+<style>
+:root{--purple:#25845a;--deep:#15563a;--mint:#baf2cf;--yellow:#fff0a6;--pink:#ffd0d8;--blue:#c7f0dd;--ink:#183c2b;--paper:#e9f8e9}
+*{box-sizing:border-box}body{margin:0;font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+header{background:linear-gradient(135deg,#55b878,#2d925e);color:white;padding:18px clamp(16px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.3rem}.logo{background:#fff;color:var(--purple);border-radius:16px;width:44px;height:44px;display:grid;place-items:center;font-size:1.7rem;box-shadow:0 4px 0 #1e6845}
+nav{display:flex;gap:8px;flex-wrap:wrap}nav button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;color:white;background:#ffffff25;cursor:pointer}nav button.active,nav button:hover{background:white;color:var(--purple)}
+main{max-width:1100px;margin:auto;padding:24px clamp(14px,4vw,40px) 56px}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center;background:linear-gradient(120deg,#d8f5d8,#c4efd5);border-radius:28px;padding:clamp(22px,5vw,44px);overflow:hidden}
+.kicker{color:var(--purple);font-size:.8rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.04;margin:10px 0 14px;letter-spacing:-1.5px}p{line-height:1.6}.hero p{max-width:580px}.hero-art{font-size:clamp(6rem,14vw,10rem);text-align:center;filter:drop-shadow(0 10px 0 #d0c2ff);animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-9px) rotate(3deg)}}
+.btn{border:0;border-radius:14px;padding:13px 18px;background:var(--purple);color:white;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #1e6845;transition:.15s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:white;color:var(--purple);box-shadow:0 4px 0 #d9cef9}.btn:focus-visible,button:focus-visible{outline:3px solid #ffb100;outline-offset:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 30px}.stat{border:2px solid #d5ead8;border-radius:18px;padding:15px;background:white;display:flex;align-items:center;gap:12px}.stat .emoji{font-size:1.8rem}.stat strong{display:block;font-size:1.3rem}.stat small{color:#54715e}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:28px 0 14px}.section-head h2{margin:0;font-size:1.6rem}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:white;border:2px solid #d5ead8;border-radius:22px;padding:20px;box-shadow:0 5px 0 #d9edda}.card .icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:2rem;margin-bottom:12px}.card h3{margin:6px 0}.card p{font-size:.94rem;color:#54715e;min-height:48px}.mint{background:var(--mint)}.yellow{background:var(--yellow)}.pink{background:var(--pink)}.blue{background:var(--blue)}
+.panel{background:white;border:2px solid #d5ead8;border-radius:24px;padding:clamp(18px,4vw,30px);margin-top:20px}.hidden{display:none!important}.progress{height:10px;border-radius:20px;background:#d7ebd9;overflow:hidden;margin:14px 0 22px}.progress span{height:100%;display:block;background:#8be5bd;width:0;transition:width .3s}
+.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.answer{border:2px solid #cde5d0;border-radius:14px;background:#fff;padding:14px;font-weight:800;cursor:pointer;color:var(--ink);text-align:left}.answer:hover{border-color:var(--purple);background:#e8f8e9}.answer.correct{background:#d8ffec;border-color:#28ae77}.answer.wrong{background:#ffe0e8;border-color:#e56c8b}.feedback{font-weight:800;min-height:28px;margin:15px 0}.element-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.element{border-radius:15px;padding:14px 8px;text-align:center;border:2px solid #d5ead8;background:#effbf0;cursor:pointer}.element b{display:block;font-size:1.7rem;color:var(--purple)}.element span{font-size:.8rem}.element:hover{transform:translateY(-2px)}.element-detail{background:#d5f5df;border-radius:18px;padding:18px;margin-top:14px}
+footer{text-align:center;color:#54715e;padding:22px;border-top:1px solid #cde5d0;font-size:.9rem}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.hero-art{font-size:6rem;grid-row:1}.cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.stat{padding:12px}.element-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:420px){.answers{grid-template-columns:1fr}.element-grid{grid-template-columns:repeat(2,1fr)}nav button{padding:9px 11px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">⚗️</div><span>QuimiAventura Aula</span></div>
+  <nav aria-label="Navegación principal">
+    <button class="active" data-view="inicio">Inicio</button><button data-view="retos">Retos</button><button data-view="tabla">Elementos</button><button data-view="laboratorio">Laboratorio</button><button data-view="glosario">Glosario</button><button data-view="rutas">Aprendizaje</button><button data-view="docentes">Docentes</button>
+  </nav>
+</header>
+<main>
+  <section id="inicio" class="view">
+    <div class="hero">
+      <div><div class="kicker">Plataforma de aprendizaje · grados 10.º y 11.º</div><h1>La química se aprende de muchas maneras 🌱</h1><p>Una herramienta para que los estudiantes comprendan, practiquen y repasen química, y para que los profesores preparen clases, actividades y evaluaciones de apoyo.</p><button class="btn" onclick="showView('rutas')">Explorar formas de aprender →</button></div>
+      <div class="hero-art" aria-hidden="true">🧪</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="emoji">⭐</span><div><strong id="points">0</strong><small>Puntos ganados</small></div></div>
+      <div class="stat"><span class="emoji">🎯</span><div><strong id="done">0</strong><small>Retos respondidos</small></div></div>
+      <div class="stat"><span class="emoji">🏆</span><div><strong id="best">Principiante</strong><small>Tu nivel</small></div></div>
+    </div>
+    <div class="section-head"><div><div class="kicker">Aprendizaje flexible</div><h2>Elige cómo aprender química</h2></div></div>
+    <div class="cards">
+      <article class="card"><div class="icon mint">🧠</div><h3>Aprender jugando</h3><p>Cuestionarios, retos rápidos y práctica con retroalimentación.</p><button class="btn" onclick="showView('retos')">Jugar y practicar</button></article>
+      <article class="card"><div class="icon yellow">📖</div><h3>Aprender leyendo</h3><p>Conceptos clave explicados con palabras sencillas y ejemplos.</p><button class="btn" onclick="showView('rutas')">Ver lecciones</button></article>
+      <article class="card"><div class="icon pink">🧮</div><h3>Aprender resolviendo</h3><p>Procedimientos guiados para practicar problemas y cálculos.</p><button class="btn" onclick="showView('rutas')">Ver ejercicios</button></article>
+      <article class="card"><div class="icon blue">🔬</div><h3>Aprender explorando</h3><p>Instrumentos, observaciones y seguridad en el laboratorio.</p><button class="btn" onclick="showView('laboratorio')">Explorar</button></article>
+      <article class="card"><div class="icon mint">🧩</div><h3>Aprender consultando</h3><p>Busca elementos, símbolos y definiciones en recursos de referencia.</p><button class="btn" onclick="showView('tabla')">Tabla periódica</button></article>
+      <article class="card"><div class="icon yellow">👩‍🏫</div><h3>Apoyo al profesor</h3><p>Ideas de clase, objetivos, actividades y evaluación formativa.</p><button class="btn" onclick="showView('docentes')">Zona docente</button></article>
+    </div>
+    <div class="section-head"><div><div class="kicker">Aprende paso a paso</div><h2>Rutas de aprendizaje</h2></div></div>
+    <div class="cards">
+      <article class="card"><div class="icon yellow">⚛️</div><h3>La estructura del átomo</h3><p>Protones, neutrones, electrones, número atómico y masa.</p><button class="btn secondary" onclick="showView('glosario')">Ver conceptos</button></article>
+      <article class="card"><div class="icon pink">🧴</div><h3>Materia y mezclas</h3><p>Diferencia elementos, compuestos, mezclas homogéneas y heterogéneas.</p><button class="btn secondary" onclick="showView('laboratorio')">Aprender</button></article>
+      <article class="card"><div class="icon blue">🔬</div><h3>Reacciones químicas</h3><p>Identifica reactivos, productos y la conservación de los átomos.</p><button class="btn secondary" onclick="startQuiz('todos')">Practicar</button></article>
+    </div>
+  </section>
+
+  <section id="retos" class="view hidden">
+    <div class="section-head"><div><div class="kicker">Modo de juego</div><h2>Reto químico 🧪</h2><p>Elige una respuesta. Cada acierto suma 10 puntos.</p></div><button class="btn secondary" onclick="startQuiz('todos')">Reiniciar reto</button></div>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><strong id="quiz-category">Reto 1</strong><span id="quiz-count">Pregunta 1 de 8</span></div>
+      <div class="progress"><span id="bar"></span></div>
+      <h2 id="question">¿Cuál es el símbolo químico del oxígeno?</h2>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      <button id="next" class="btn hidden" onclick="nextQuestion()">Siguiente →</button>
+    </div>
+  </section>
+
+  <section id="tabla" class="view hidden">
+    <div class="section-head"><div><div class="kicker">Mini tabla periódica</div><h2>Conoce los elementos 🔎</h2><p>Toca un elemento para ver algunos datos.</p></div></div>
+    <div class="element-grid" id="element-grid"></div>
+    <div class="element-detail" id="element-detail"><strong>¡Elige un elemento!</strong><p>Sus datos aparecerán aquí.</p></div>
+  </section>
+
+  <section id="rutas" class="view hidden">
+    <div class="section-head"><div><div class="kicker">Rutas de estudio</div><h2>Aprende por temas y métodos 📚</h2><p>Contenido de apoyo para estudiantes de 10.º y 11.º. El orden puede adaptarse al plan de aula del profesor.</p></div></div>
+    <div class="cards">
+      <article class="card"><div class="icon mint">⚛️</div><h3>1. Estructura atómica</h3><p><strong>Idea clave:</strong> el átomo tiene un núcleo con protones y neutrones, y electrones alrededor. El número de protones identifica el elemento.</p><p><strong>Comprueba:</strong> ¿qué partícula define el número atómico?</p><button class="btn secondary" onclick="revealLesson('lesson1')">Ver respuesta</button><p id="lesson1" class="hidden">Los protones.</p></article>
+      <article class="card"><div class="icon yellow">🧾</div><h3>2. Tabla periódica</h3><p><strong>Idea clave:</strong> los elementos se organizan por número atómico. Las columnas se llaman grupos y las filas, períodos.</p><p><strong>Práctica:</strong> busca Na, Cl y Ca en la tabla de elementos.</p><button class="btn secondary" onclick="showView('tabla')">Abrir tabla</button></article>
+      <article class="card"><div class="icon pink">🔗</div><h3>3. Enlaces y compuestos</h3><p><strong>Idea clave:</strong> los enlaces iónicos implican atracción entre iones; en los covalentes se comparten electrones.</p><p><strong>Ejemplo:</strong> NaCl es cloruro de sodio y H₂O es agua.</p><button class="btn secondary" onclick="showView('glosario')">Consultar conceptos</button></article>
+      <article class="card"><div class="icon blue">⚖️</div><h3>4. Reacciones y balanceo</h3><p><strong>Idea clave:</strong> una ecuación balanceada tiene el mismo número de átomos de cada elemento en ambos lados.</p><p><strong>Consejo:</strong> ajusta coeficientes, no cambies los subíndices de las fórmulas.</p><button class="btn secondary" onclick="showView('retos')">Practicar</button></article>
+      <article class="card"><div class="icon mint">🧪</div><h3>5. Mol y masa molar</h3><p><strong>Idea clave:</strong> la masa molar relaciona la masa de una sustancia con la cantidad de sustancia.</p><p><strong>Fórmula:</strong> n = m / M, donde n está en mol, m en gramos y M en g/mol.</p><button class="btn secondary" onclick="revealLesson('lesson5')">Ver ejemplo</button><p id="lesson5" class="hidden">Si tienes 18 g de agua y su masa molar es aproximadamente 18 g/mol: n = 18 g ÷ 18 g/mol = 1 mol.</p></article>
+      <article class="card"><div class="icon yellow">🧴</div><h3>6. Disoluciones, ácidos y bases</h3><p><strong>Idea clave:</strong> una disolución es una mezcla homogénea. El pH ayuda a describir la acidez o basicidad de una disolución acuosa.</p><button class="btn secondary" onclick="showView('glosario')">Estudiar términos</button></article>
+      <article class="card"><div class="icon pink">🌡️</div><h3>7. Materia y energía</h3><p>Compara cambios físicos y químicos, estados de la materia, temperatura y energía en transformaciones.</p><button class="btn secondary" onclick="startQuiz('todos')">Hacer un reto</button></article>
+      <article class="card"><div class="icon blue">🌎</div><h3>8. Química cotidiana</h3><p>Relaciona la química con el agua, los alimentos, los materiales y el cuidado ambiental.</p><button class="btn secondary" onclick="revealLesson('lesson8')">Ver actividad</button><p id="lesson8" class="hidden">Elige un producto de casa, lee su etiqueta y anota tres componentes. No mezcles productos de limpieza.</p></article>
+    </div>
+    <div class="panel"><h3>Cómo estudiar un tema</h3><ol><li>Lee la idea clave y anota palabras desconocidas.</li><li>Resuelve un ejemplo paso a paso.</li><li>Practica con preguntas sin mirar las respuestas.</li><li>Explica el concepto con tus propias palabras.</li><li>Pregunta al profesor lo que aún no esté claro.</li></ol></div>
+  </section>
+  <section id="docentes" class="view hidden">
+    <div class="section-head"><div><div class="kicker">Recursos para el aula</div><h2>Espacio de apoyo docente 👩‍🏫</h2><p>Ideas editables para complementar la planeación. No reemplazan el currículo institucional ni el criterio profesional del profesor.</p></div></div>
+    <div class="cards">
+      <article class="card"><div class="icon mint">🎯</div><h3>Objetivos de aprendizaje</h3><p>Al finalizar una sesión, el estudiante puede explicar un concepto, aplicar un procedimiento y justificar una respuesta con vocabulario químico.</p></article>
+      <article class="card"><div class="icon yellow">🗓️</div><h3>Secuencia de clase sugerida</h3><p><strong>1. Activación:</strong> pregunta inicial (5 min). <strong>2. Explicación:</strong> idea clave y ejemplo (15 min). <strong>3. Práctica:</strong> parejas o grupos (15 min). <strong>4. Cierre:</strong> ticket de salida (5 min).</p></article>
+      <article class="card"><div class="icon pink">👥</div><h3>Aprendizaje colaborativo</h3><p>Asigna roles: lector de la pregunta, encargado de procedimiento, verificador de unidades y portavoz. Pide que el equipo explique cómo llegó a la respuesta.</p></article>
+      <article class="card"><div class="icon blue">📝</div><h3>Evaluación formativa</h3><p>Utiliza preguntas cortas antes y después de la clase. Observa comprensión conceptual, procedimiento, uso de unidades y explicación del razonamiento.</p></article>
+      <article class="card"><div class="icon mint">♿</div><h3>Enseñanza diferenciada</h3><p>Ofrece definiciones breves, diagramas, ejercicios resueltos, retos de extensión y tiempo adicional según las necesidades del grupo.</p></article>
+      <article class="card"><div class="icon yellow">🧯</div><h3>Seguridad primero</h3><p>Toda práctica real debe ser aprobada y supervisada por el docente, con evaluación de riesgos, equipo adecuado y normas institucionales.</p></article>
+    </div>
+    <div class="panel"><h3>Generador de ideas para clase</h3><p>Selecciona un tema para obtener una actividad que puedas adaptar.</p><label for="teacher-topic"><strong>Tema:</strong></label><select id="teacher-topic" style="width:100%;padding:12px;border:2px solid #cde5d0;border-radius:12px;margin:8px 0 14px;font:inherit"><option>Estructura atómica</option><option>Tabla periódica</option><option>Enlaces químicos</option><option>Balanceo de ecuaciones</option><option>Mol y masa molar</option><option>Ácidos y bases</option><option>Mezclas y disoluciones</option></select><button class="btn" onclick="generateTeacherActivity()">Crear idea de actividad</button><div id="teacher-output" class="element-detail hidden" aria-live="polite"></div></div>
+    <div class="panel"><h3>Lista de cotejo</h3><label><input type="checkbox"> Identifica correctamente los conceptos.</label><br><label><input type="checkbox"> Muestra el procedimiento y las unidades.</label><br><label><input type="checkbox"> Justifica la respuesta con una idea científica.</label><br><label><input type="checkbox"> Revisa si el resultado tiene sentido.</label></div>
+  </section>
+</main>
+<footer>QuimiAventura Aula · Recursos para estudiantes y profesores · Aprende a tu ritmo 🌿</footer>
+<script>
+const questions = [
+ {cat:'Elementos',q:'¿Cuál es el símbolo químico del oxígeno?',a:['Ox','O','Og','X'],c:1,why:'El símbolo del oxígeno es O.'},
+ {cat:'Átomos',q:'¿Qué partícula tiene carga eléctrica negativa?',a:['Protón','Neutrón','Electrón','Núcleo'],c:2,why:'Los electrones tienen carga negativa.'},
+ {cat:'Elementos',q:'¿Cuál es el símbolo químico del sodio?',a:['S','So','Na','Sd'],c:2,why:'El símbolo Na viene del nombre latino natrium.'},
+ {cat:'Fórmulas',q:'¿Qué representa H₂O?',a:['Oxígeno','Agua','Sal de mesa','Hidrógeno puro'],c:1,why:'Una molécula de agua contiene dos átomos de hidrógeno y uno de oxígeno.'},
+ {cat:'Átomos',q:'¿En qué parte del átomo se encuentran protones y neutrones?',a:['En el núcleo','En los electrones','En la corteza únicamente','Fuera del átomo'],c:0,why:'Protones y neutrones se encuentran en el núcleo.'},
+ {cat:'Fórmulas',q:'¿Cuál es la fórmula del dióxido de carbono?',a:['CO','CO₂','C₂O','CaO'],c:1,why:'CO₂ contiene un átomo de carbono y dos de oxígeno.'},
+ {cat:'Elementos',q:'¿Qué elemento tiene el símbolo Fe?',a:['Flúor','Fósforo','Hierro','Francio'],c:2,why:'Fe es el símbolo del hierro.'},
+ {cat:'Reacciones',q:'¿Qué significa que una ecuación química esté balanceada?',a:['Tiene colores iguales','Hay igual número de átomos de cada elemento en ambos lados','Siempre produce agua','No tiene productos'],c:1,why:'Se conserva el número de átomos de cada elemento.'},
+ {cat:'Fórmulas',q:'¿Cuál de estas sustancias es sal de mesa?',a:['NaCl','HCl','O₂','NH₃'],c:0,why:'El cloruro de sodio tiene fórmula NaCl.'},
+ {cat:'Átomos',q:'¿Qué indica el número atómico de un elemento?',a:['Sus neutrones siempre','Sus moléculas','El número de protones','Su estado físico'],c:2,why:'El número atómico es igual al número de protones.'},
+ {cat:'Reacciones',q:'En una reacción química, los átomos...',a:['Desaparecen siempre','Se transforman en energía solamente','Se reorganizan para formar sustancias nuevas','Dejan de existir'],c:2,why:'Los átomos se reorganizan; se conservan en una reacción química común.'},
+ {cat:'Elementos',q:'¿Cuál es el símbolo del potasio?',a:['P','Pt','K','Po'],c:2,why:'El símbolo químico del potasio es K.'}
+];
+const formulaIndices=[3,5,8];
+let pool=[...questions], current=0, score=0, answered=0, points=Number(localStorage.getItem('qa_points')||0), total=Number(localStorage.getItem('qa_done')||0), selected=null;
+function updateStats(){document.getElementById('points').textContent=points;document.getElementById('done').textContent=total;document.getElementById('best').textContent=points>=100?'Genio químico':points>=40?'Explorador':'Principiante'}
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='retos'&&!document.getElementById('question').dataset.started)startQuiz('todos');window.scrollTo({top:0,behavior:'smooth'})}
+function revealLesson(id){document.getElementById(id).classList.toggle('hidden')}
+function generateTeacherActivity(){const topic=document.getElementById('teacher-topic').value;const ideas={
+'Estructura atómica':'En parejas, dibujen un modelo sencillo de un átomo e identifiquen protones, neutrones y electrones. Cierre: explicar qué determina el número atómico.',
+'Tabla periódica':'Entrega tarjetas con símbolos y números atómicos para que los equipos organicen los elementos y expliquen patrones de grupos y períodos.',
+'Enlaces químicos':'Pide comparar NaCl y H₂O con modelos de partículas y explicar la diferencia entre enlace iónico y covalente.',
+'Balanceo de ecuaciones':'Da tres ecuaciones sin balancear. El alumnado cuenta átomos a ambos lados, ajusta coeficientes y comprueba en parejas.',
+'Mol y masa molar':'Propón un ejercicio guiado: identifica datos, escribe fórmula, sustituye valores con unidades y verifica el resultado.',
+'Ácidos y bases':'Usa etiquetas o datos simulados de pH para ordenar sustancias de más ácidas a más básicas. No prueben ni mezclen sustancias.',
+'Mezclas y disoluciones':'Presenta ejemplos cotidianos y pide clasificarlos como sustancias puras o mezclas, justificando si son homogéneas o heterogéneas.'
+};const out=document.getElementById('teacher-output');out.innerHTML='<h3>Actividad: '+topic+'</h3><p>'+ideas[topic]+'</p><p><strong>Evidencia de aprendizaje:</strong> explicación oral o escrita y una respuesta individual al final.</p>';out.classList.remove('hidden')}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+function startQuiz(mode){pool=(mode==='formulas'?questions.filter((q,i)=>formulaIndices.includes(i)):[...questions]);pool=pool.sort(()=>Math.random()-.5);current=0;score=0;answered=0;document.getElementById('question').dataset.started='1';showView('retos');renderQuestion()}
+function renderQuestion(){selected=null;const q=pool[current];document.getElementById('quiz-category').textContent='🧪 '+q.cat;document.getElementById('quiz-count').textContent=`Pregunta ${current+1} de ${pool.length}`;document.getElementById('bar').style.width=(current/pool.length*100)+'%';document.getElementById('question').textContent=q.q;document.getElementById('feedback').textContent='';document.getElementById('next').classList.add('hidden');const wrap=document.getElementById('answers');wrap.innerHTML='';q.a.forEach((answer,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+answer;b.onclick=()=>chooseAnswer(i,b);wrap.appendChild(b)})}
+function chooseAnswer(i,button){if(selected!==null)return;selected=i;const q=pool[current];document.querySelectorAll('.answer').forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add('correct')});const feedback=document.getElementById('feedback');if(i===q.c){score+=10;points+=10;feedback.textContent='¡Correcto! 🎉 '+q.why}else{button.classList.add('wrong');feedback.textContent='¡Buen intento! 💡 '+q.why}answered++;total++;localStorage.setItem('qa_points',points);localStorage.setItem('qa_done',total);updateStats();document.getElementById('bar').style.width=((current+1)/pool.length*100)+'%';document.getElementById('next').classList.remove('hidden');document.getElementById('next').textContent=current===pool.length-1?'Ver resultado 🏆':'Siguiente →'}
+function nextQuestion(){if(current<pool.length-1){current++;renderQuestion()}else{document.getElementById('quiz-category').textContent='🏆 Reto terminado';document.getElementById('quiz-count').textContent=`${answered} preguntas respondidas`;document.getElementById('question').textContent=`¡Lograste ${score} de ${pool.length*10} puntos en este reto!`;document.getElementById('answers').innerHTML='<p>La práctica hace al maestro. ¡Sigue explorando!</p>';document.getElementById('feedback').textContent=score===pool.length*10?'¡Perfecto! Eres una estrella química. 🌟':'¡Buen trabajo! Repasa y vuelve a intentarlo.';document.getElementById('next').textContent='Jugar otra vez';document.getElementById('next').onclick=()=>{document.getElementById('next').onclick=nextQuestion;startQuiz('todos')}}}
+const elements=[
+ ['H','Hidrógeno',1,'No metal','Forma parte del agua y de muchas sustancias.'],['He','Helio',2,'Gas noble','Es un gas muy ligero.'],['Li','Litio',3,'Metal alcalino','Se usa en baterías recargables.'],['C','Carbono',6,'No metal','Es fundamental en la química orgánica.'],['N','Nitrógeno',7,'No metal','Forma cerca del 78 % del aire.'],['O','Oxígeno',8,'No metal','Es importante para la respiración.'],['F','Flúor',9,'Halógeno','Es muy reactivo y forma fluoruros.'],['Ne','Neón',10,'Gas noble','Se usa en algunos letreros luminosos.'],['Na','Sodio',11,'Metal alcalino','Está presente en la sal común como ion.'],['Mg','Magnesio',12,'Metal alcalinotérreo','Es un metal ligero.'],['Al','Aluminio',13,'Metal','Se usa en latas y estructuras ligeras.'],['Si','Silicio',14,'Metaloide','Es importante en los chips electrónicos.'],['P','Fósforo',15,'No metal','Participa en moléculas importantes para la vida.'],['S','Azufre',16,'No metal','Se utiliza para producir ácido sulfúrico.'],['Cl','Cloro',17,'Halógeno','Sus compuestos se usan para desinfectar agua.'],['K','Potasio',19,'Metal alcalino','Es importante para el funcionamiento celular.'],['Ca','Calcio',20,'Metal alcalinotérreo','Forma parte de huesos y dientes.'],['Fe','Hierro',26,'Metal de transición','Se usa para fabricar acero.'],['Cu','Cobre',29,'Metal de transición','Conduce muy bien la electricidad.'],['Zn','Zinc',30,'Metal de transición','Se utiliza para proteger hierro contra la corrosión.']
+];
+const grid=document.getElementById('element-grid');
+elements.forEach(e=>{const b=document.createElement('button');b.className='element';b.innerHTML=`<b>${e[0]}</b><span>${e[1]}</span><br><small>N.º ${e[2]}</small>`;b.onclick=()=>{document.getElementById('element-detail').innerHTML=`<h3>${e[0]} — ${e[1]}</h3><p><strong>Número atómico:</strong> ${e[2]}<br><strong>Clasificación:</strong> ${e[3]}</p><p>${e[4]}</p>`};grid.appendChild(b)});
+updateStats();
+</script>
+</body>
+</html>
